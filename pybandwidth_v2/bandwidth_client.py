@@ -1,5 +1,3 @@
-import json
-
 import requests
 
 
@@ -17,17 +15,20 @@ class BandwidthAPI:
         self.session.auth = (username, password)
         self.account_id = account_id
 
-    def _request(self, method, url, params=None, data=None, auth=None):
+    def _request(self, method, url, params=None, json=None, data=None, auth=None):
         params = params or {}
         data = data or {}
-        response = self.session.request(method, url, params=params, data=data, auth=auth)
+        # FIXME: use a better join url function
+        print(self.session.auth)
+        url = f'{self.BASE_URL}{url}'
+        response = self.session.request(method, url, params=params, json=json, auth=auth)
         response.raise_for_status()
         return response
 
     def _get(self, url, params=None):
         return self._request('GET', url, params=params)
 
-    def _post(self, url, params=None, data=None):
+    def _post(self, url, params=None, json=None, data=None):
         return self._request('POST', url, params=params, data=data)
 
 
@@ -69,4 +70,5 @@ class BandwidthMessagingAPI(BandwidthAPI):
             "applicationId": self.application_id,
             "tag": tag,
         }
-        return self._post(url, data=json.dumps(data))
+        print(data)
+        return self._post(url, json=data)

@@ -15,11 +15,9 @@ class BandwidthAPI:
         self.session.auth = (username, password)
         self.account_id = account_id
 
-    def _request(self, method, url, params=None, json=None, data=None, auth=None):
+    def _request(self, method, url, params=None, json=None, auth=None):
         params = params or {}
-        data = data or {}
         # FIXME: use a better join url function
-        print(self.session.auth)
         url = f'{self.BASE_URL}{url}'
         response = self.session.request(method, url, params=params, json=json, auth=auth)
         response.raise_for_status()
@@ -28,11 +26,12 @@ class BandwidthAPI:
     def _get(self, url, params=None):
         return self._request('GET', url, params=params)
 
-    def _post(self, url, params=None, json=None, data=None):
-        return self._request('POST', url, params=params, data=data)
+    def _post(self, url, params=None, json=None):
+        return self._request('POST', url, params=params, json=json)
 
 
 class BandwidthAccountAPI(BandwidthAPI):
+    BASE_URL = 'https://dashboard.bandwidth.com/api/'
 
     def search_available_numbers(self, **params):
         """
@@ -48,6 +47,8 @@ class BandwidthAccountAPI(BandwidthAPI):
 
 
 class BandwidthMessagingAPI(BandwidthAPI):
+    BASE_URL = 'https://messaging.bandwidth.com/api/'
+
     def __init__(self, account_id, api_token, api_secret, application_id):
         super().__init__(account_id, api_token, api_secret)
         self.application_id = application_id
@@ -70,5 +71,4 @@ class BandwidthMessagingAPI(BandwidthAPI):
             "applicationId": self.application_id,
             "tag": tag,
         }
-        print(data)
         return self._post(url, json=data)

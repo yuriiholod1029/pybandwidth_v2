@@ -62,11 +62,11 @@ class TestBandwidthAccountAPI(BandwidthClientTestMixin):
     def test_search_available_numbers_correctly_set_url_and_params(self, mock_get):
         account_api = BandwidthAccountAPI('test', 'test', 'test')
         numbers = [{
-            "key": "value"
-        }]
+            "key": "value",
+        },]
         mock_get.return_value = self._mock_response(json_data=numbers)
         mock_params = {
-            'param_key': 'param_value'
+            'param_key': 'param_value',
         }
         actual_response = account_api.search_available_numbers(**mock_params)
 
@@ -79,8 +79,8 @@ class TestBandwidthAccountAPI(BandwidthClientTestMixin):
     def test_search_available_numbers_response_ok(self):
         test_numbers = [
             {
-                "number": "value"
-            }
+                "number": "value",
+            },
         ]
         mock_response = self._mock_response(json_data=test_numbers)
         self.mock_session_request.return_value = mock_response
@@ -112,7 +112,7 @@ class TestBandwidthMessagingAPI(BandwidthClientTestMixin):
     def test_send_message_correctly_set_url_and_data(self, mock_post):
         messaging_api = BandwidthMessagingAPI('test', 'test', 'test', 'test')
         success_response = {
-            "key": "value"
+            "key": "value",
         }
         mock_post.return_value = success_response
         mock_data = {

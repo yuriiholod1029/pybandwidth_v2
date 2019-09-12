@@ -1,9 +1,8 @@
-from distutils.core import setup
+import setuptools
 
-
-setup(
+setuptools.setup(
   name='pybandwidth_v2',
-  packages=['pybandwidth_v2'],
+  packages=setuptools.find_packages(),
   version='0.0.1',
   license='MIT',
   description='Bandwidth API for v2 messaging',
@@ -24,4 +23,9 @@ setup(
     'Programming Language :: Python :: 3.6',
     'Programming Language :: Python :: 3.7',
   ],
+  python_requires='>=3.6',
+  project_urls={
+    'Source': 'https://github.com/yuriiholod1029/pybandwidth_v2',
+    'Tracker': 'https://github.com/yuriiholod1029/pybandwidth_v2/issues',
+  },
 )

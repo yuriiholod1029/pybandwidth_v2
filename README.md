@@ -6,7 +6,7 @@ Client library for the [Bandwidth App Platform](http://ap.bandwidth.com/docs/res
 
 ## Requirements
 * [Bandwidth Account](http://bandwidth.com/products/application-platform/?utm_medium=social&utm_source=github&utm_campaign=dtolb&utm_content=_)
-* [At least Python 3](https://www.python.org/downloads/)
+* [At least Python 3.6](https://www.python.org/downloads/)
 ## Installation
 ```
 pip install pybandwidth_v2
@@ -17,7 +17,7 @@ pip install pybandwidth_v2
 
 ### Client Initialization
 ```python
-from bandwidth_client import BandwidthAccountAPI, BandwidthMessagingAPI
+from pybandwidth_v2.bandwidth_client import BandwidthAccountAPI, BandwidthMessagingAPI
 messaging_api = BandwidthMessagingAPI('acc-account_id', 't-token', 's-secret', 'a-application_id')
 account_api = BandwidthAccountAPI('acc-account_id', 'u-username', 'p-password')
 ```

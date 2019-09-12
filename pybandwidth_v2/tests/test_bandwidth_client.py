@@ -1,6 +1,6 @@
 from requests import Session
 
-from nose.tools import assert_true, assert_dict_equal, assert_raises, assert_false, assert_equal
+from nose.tools import assert_true, assert_list_equal, assert_raises, assert_false, assert_equal, assert_dict_equal
 from requests.exceptions import HTTPError
 from unittest.mock import patch, Mock
 
@@ -10,14 +10,15 @@ from pybandwidth_v2.bandwidth_client import BandwidthAccountAPI, BandwidthMessag
 class BandwidthClientTestMixin(object):
 
     """
-    Test cases
+    Test cases helper
     """
     def _mock_response(
             self,
             status=200,
             content="CONTENT",
             json_data=None,
-            raise_for_status=None):
+            raise_for_status=None,
+    ):
         """
         since we typically test a bunch of different
         requests calls for a service, we are going to do
@@ -35,7 +36,7 @@ class BandwidthClientTestMixin(object):
         # add json data if provided
         if json_data:
             mock_resp.json = Mock(
-                return_value=json_data
+                return_value=json_data,
             )
         return mock_resp
 
@@ -60,9 +61,9 @@ class TestBandwidthAccountAPI(BandwidthClientTestMixin):
     @patch.object(BandwidthAPI, '_get')
     def test_search_available_numbers_correctly_set_url_and_params(self, mock_get):
         account_api = BandwidthAccountAPI('test', 'test', 'test')
-        numbers = {
+        numbers = [{
             "key": "value"
-        }
+        }]
         mock_get.return_value = self._mock_response(json_data=numbers)
         mock_params = {
             'param_key': 'param_value'
@@ -72,7 +73,8 @@ class TestBandwidthAccountAPI(BandwidthClientTestMixin):
         mock_get.assert_called_once_with(f'accounts/test/availableNumbers', params=mock_params)
         assert_true(mock_get.called)
         assert_false(self.mock_session_request.called)
-        assert_dict_equal(numbers, actual_response)
+        assert_equal(actual_response[0]["key"], "value")
+        assert_list_equal(numbers, actual_response)
 
     def test_search_available_numbers_response_ok(self):
         test_numbers = [
@@ -87,7 +89,8 @@ class TestBandwidthAccountAPI(BandwidthClientTestMixin):
 
         assert_true(self.mock_session_request.called)
         assert_true(mock_response.raise_for_status.called)
-        assert_dict_equal(numbers, test_numbers)
+        assert_equal(test_numbers[0]["number"], "value")
+        assert_list_equal(numbers, test_numbers)
 
     def test_search_available_numbers_response_not_ok(self):
         mock_response = self._mock_response(status=500, raise_for_status=HTTPError)

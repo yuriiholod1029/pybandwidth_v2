@@ -9,4 +9,6 @@ redis/
 db/
 media/
 venv/
-
+build/
+dist/
+pybandwidth_v2.egg-info/

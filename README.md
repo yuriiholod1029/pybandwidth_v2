@@ -42,7 +42,7 @@ print(message_id)
 ```
 
 ## Release History
-### 0.0.1 (2019-09-11)
+### 0.0.2 (2019-09-12)
 Initial release of SDK
 
 ## Developer Info

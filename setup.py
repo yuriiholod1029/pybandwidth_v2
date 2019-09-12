@@ -1,15 +1,22 @@
 import setuptools
 
+from os import path
+this_directory = path.abspath(path.dirname(__file__))
+with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
+
 setuptools.setup(
   name='pybandwidth_v2',
   packages=setuptools.find_packages(),
-  version='0.0.1',
+  version='0.0.2',
   license='MIT',
   description='Bandwidth API for v2 messaging',
   author='Yurii Holodnyi',
   author_email='holodnyijurii@gmail.com',
   url='https://github.com/yuriiholod1029/pybandwidth_v2',
   download_url='https://github.com/yuriiholod1029/pybandwidth_v2/archive/v_001.tar.gz',
+  long_description=long_description,
+  long_description_content_type='text/markdown',
   keywords=['python', 'bandwidth', 'v2', 'api', 'client'],   # Keywords that define your package best
   install_requires=[
       'requests',

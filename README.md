@@ -4,7 +4,9 @@ Client library for the [Bandwidth App Platform](http://ap.bandwidth.com/docs/res
 ## Full Reference
 ### [dev.bandwidth.com/python-bandwidth](http://dev.bandwidth.com/python-bandwidth)
 
-
+## Requirements
+* [Bandwidth Account](http://bandwidth.com/products/application-platform/?utm_medium=social&utm_source=github&utm_campaign=dtolb&utm_content=_)
+* [At least Python 3](https://www.python.org/downloads/)
 ## Installation
 ```
 pip install pybandwidth_v2

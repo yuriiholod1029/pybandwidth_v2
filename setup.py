@@ -8,7 +8,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 setuptools.setup(
   name='pybandwidth_v2',
   packages=setuptools.find_packages(),
-  version='0.0.2',
+  version='0.0.3',
   license='MIT',
   description='Bandwidth API for v2 messaging',
   author='Yurii Holodnyi',

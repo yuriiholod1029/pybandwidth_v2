@@ -4,14 +4,14 @@ import requests
 class BandwidthAPI:
     BASE_URL = 'https://dashboard.bandwidth.com/api/'
 
-    def __init__(self, account_id, username, password):
+    def __init__(self, account_id, username, password, timeout=30.0):
         """
 
         :param account_id: Account id from bandwidth dashboard
         :param username: This is username for account api and api token for messaging api
         :param password: This is password for account api and api token secret for messaging api
         """
-        self.session = requests.Session()
+        self.session = requests.Session(timeout=timeout)
         self.session.auth = (username, password)
         self.account_id = account_id
 

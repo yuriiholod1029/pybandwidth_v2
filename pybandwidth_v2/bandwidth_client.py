@@ -11,15 +11,16 @@ class BandwidthAPI:
         :param username: This is username for account api and api token for messaging api
         :param password: This is password for account api and api token secret for messaging api
         """
-        self.session = requests.Session(timeout=timeout)
+        self.session = requests.Session()
         self.session.auth = (username, password)
         self.account_id = account_id
+        self.timeout = timeout
 
     def _request(self, method, url, params=None, json=None, auth=None):
         params = params or {}
         # FIXME: use a better join url function
         url = f'{self.BASE_URL}{url}'
-        response = self.session.request(method, url, params=params, json=json, auth=auth)
+        response = self.session.request(method, url, params=params, json=json, auth=auth, timeout=self.timeout)
         response.raise_for_status()
         return response
 
